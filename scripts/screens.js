@@ -1,4 +1,5 @@
 let START_GAME = false;
+const ANIMATION_SPEED = 35;
 
 const gameContainer = document.getElementsByClassName("game-container");
 
@@ -29,12 +30,41 @@ const resizeScreen = handleWindowResize();
 window.addEventListener("resize", resizeScreen);
 
 // Move between the screen based on button "CLICK"
-export const moveBetweenScreens = () => {
-    if(START_GAME){
-        gameContainer[0].scrollTop = 0;
-        START_GAME = false;
-        return;
+export const moveBetweenScreens = async() => {
+
+    const screenAnimation = handleScreenAnimation(!START_GAME ? 0 : window.innerHeight);
+    await screenAnimation();
+    START_GAME = START_GAME ? false : true;
+}
+
+const handleScreenAnimation = (current) => {
+
+    let position = current;
+    let request;
+    return function execute () {
+        return new Promise( resolve => startAnimate(resolve, position, request));
     }
-    START_GAME = true;
-    gameContainer[0].scrollTop = window.innerHeight
+}
+
+const startAnimate = (callback, position, request) => {
+
+    if(!START_GAME) {
+        position += ANIMATION_SPEED;
+        
+        if(position >= window.innerHeight)
+            return endAnimate(position, request, callback);
+
+    } else { 
+        position -= ANIMATION_SPEED;
+        if(position <= 0)
+            return endAnimate(position, request, callback);
+    }
+    gameContainer[0].scrollTop = position;
+    request = requestAnimationFrame(() => startAnimate(callback, position, request));
+}
+
+const endAnimate = (position, request, callback) => {
+    gameContainer[0].scrollTop = position;
+    cancelAnimationFrame(request)
+    callback();
 }
