@@ -23,7 +23,19 @@ class AllPlayers {
     storageKey = "snake.game.palyers";
 
     addPlayer(player){
-        this.players.push(player)
+        if(this.checkForDuplicates(player)){
+            this.players.push(player);
+            return true;
+        } else 
+            return false;
+    }
+
+    checkForDuplicates(player) {
+        for(let val of this.players){
+            if(val.name === player.name)
+                return false;
+        }
+        return true;
     }
 
     getAllPlayers(){

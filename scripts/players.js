@@ -1,4 +1,4 @@
-import { AllPlayers, Player } from "./player_s_Object_s.js";
+import {Player } from "./player_s_Object_s.js";
 
 const userCover = document.getElementById("user-cover");
 const userInput = document.getElementById("new-user-input");
@@ -27,17 +27,19 @@ export const handleInputChange = (e) => {
 }
 
 export const addPlayer = (allPlayers) => {
-
+    
     // Add new Player
-    const player = new Player(userInput.value, 0);
+    const player = new Player(userInput.value.toLowerCase(), 0);
 
     // Push the new Player to the list of existing players
-    allPlayers.addPlayer(player);
+    const added = allPlayers.addPlayer(player);
 
-    // Save to Local Storage
-    allPlayers.savePlayersToLocalStorage();
+    if(added){
+        // Save to Local Storage
+        allPlayers.savePlayersToLocalStorage();
+        addPlayerButton.disabled = true;
+        userInput.value="";
+    }
 
-    addPlayerButton.disabled = true;
-    userInput.value="";
 }
 
