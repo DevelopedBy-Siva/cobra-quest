@@ -271,7 +271,7 @@ body{
 .add-user #add-user-btn {
     background-color: green;
     color: white;
-    width: 70px;
+    width: 80px;
     height: 35px;
     display: block;
     margin: auto;
@@ -306,7 +306,7 @@ body{
 .add-user .user-list .user-list-container {
     margin-top: 10px;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 215px;
 }
 
