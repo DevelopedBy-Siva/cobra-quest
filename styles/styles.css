@@ -346,6 +346,7 @@ body{
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    background: #bbbbbb2f;
 }
 
 .add-user .user-list li:hover {

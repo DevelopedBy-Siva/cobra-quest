@@ -45,8 +45,8 @@ class AllPlayers {
         return players;
     }
 
-    removePlayer(id){
-        const newPlayers = this.players.filter( val => val.id !== id );
+    removePlayer(name){
+        const newPlayers = this.players.filter( val => val.name !== name );
         this.players = [...newPlayers];
     }
 

@@ -35,11 +35,47 @@ export const addPlayer = (allPlayers) => {
     const added = allPlayers.addPlayer(player);
 
     if(added){
+
+        createPlayerElements(player)
+
         // Save to Local Storage
         allPlayers.savePlayersToLocalStorage();
         addPlayerButton.disabled = true;
-        userInput.value="";
+        userInput.value = "";
     }
+}
 
+const playerList = document.getElementsByClassName("user-list-container")[0];
+
+export const createPlayerElements = (player) => {
+    const listTag = document.createElement("li");
+
+    const nameElement = document.createElement("span");
+    nameElement.className = "username";
+
+    nameElement.appendChild(document.createTextNode(player.name));
+
+    const scoreElement = document.createElement("span");
+    scoreElement.className = "user-score";
+
+    scoreElement.appendChild(document.createTextNode(`Highscore: ${player.score}`));
+
+    const detailsContainer = document.createElement("div");
+    detailsContainer.appendChild(nameElement);
+    detailsContainer.appendChild(scoreElement);
+
+    // Player Remove Elements
+    const removeElement = document.createElement("button");
+    removeElement.className = "remove-user";
+
+    const removeIcon = document.createElement("i");
+    removeIcon.className = "fas fa-trash-alt";
+
+    removeElement.appendChild(removeIcon);
+
+    listTag.appendChild(detailsContainer);
+    listTag.appendChild(removeElement);
+
+    playerList.appendChild(listTag)
 }
 
