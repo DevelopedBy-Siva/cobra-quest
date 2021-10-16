@@ -7,6 +7,7 @@
     <title>Snake Game</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Raleway:ital,wght@1,513&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/styles.css">
     <script src="https://kit.fontawesome.com/041abb8e24.js" crossorigin="anonymous"></script>
     <script src="./scripts/index.js" defer type="module" ></script>
@@ -17,9 +18,15 @@
             <button id="start">START</button>
         </div>
         <div class="game game-screen">
-            <button id="exit">
-                <i class="fas fa-window-close"></i>
-            </button>
+            <div id="navbar">
+                <div id="score">
+                    <i class="fas fa-egg"></i>
+                    <span>000520</span>
+                </div>
+                <button id="exit">
+                    QUIT
+                </button>
+            </div>
             <div id="dialog-cover">
                 <div id="warning" class="dialog-box">
                     <div class="dialog-content">
