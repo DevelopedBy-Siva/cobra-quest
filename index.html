@@ -7,7 +7,7 @@
     <title>Snake Game</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Raleway:ital,wght@1,513&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=ZCOOL+KuaiLe&family=Raleway:ital,wght@1,513&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/styles.css">
     <script src="https://kit.fontawesome.com/041abb8e24.js" crossorigin="anonymous"></script>
     <script src="./scripts/index.js" defer type="module" ></script>
@@ -15,6 +15,38 @@
 <body>
     <div class="game-container">
         <div class="game game-cover">
+            <button id="players">
+                <i class="fas fa-user-alt"></i>
+            </button>
+            <div class="user-cover">
+                <div class="add-user">
+                    <button class="add-user-close"><i class="fas fa-times-circle"></i></button>
+                    <input spellcheck="false"/>
+                    <button id="add-user-btn">Add</button>
+                    <div class="user-list">
+                        <span id="user-list-title">Users</span>
+                        <div class="user-list-container">
+                            <li id="user-selected">
+                                <div>
+                                    <span class="username">sivasanker</span>
+                                    <span class="user-score">Highscore: 1200</span>
+                                </div>
+                                <button class="remove-user"><i class="fas fa-trash-alt"></i></button>
+                            </li>
+                            <li>
+                                <div>
+                                    <span class="username">dukenukem</span>
+                                    <span class="user-score">Highscore: 100</span>
+                                </div>
+                                <button class="remove-user"><i class="fas fa-trash-alt"></i></button>
+                            </li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="game-title">
+                <h4>THE</br> SNAKE GAME</h4>
+            </div>
             <button id="start">START</button>
         </div>
         <div class="game game-screen">
@@ -23,9 +55,7 @@
                     <i class="fas fa-egg"></i>
                     <span>000520</span>
                 </div>
-                <button id="exit">
-                    QUIT
-                </button>
+                <button id="exit">QUIT</button>
             </div>
             <div id="dialog-cover">
                 <div id="warning" class="dialog-box">
