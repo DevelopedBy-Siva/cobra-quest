@@ -5,17 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="./styles/styles.css">
+    <script src="https://kit.fontawesome.com/041abb8e24.js" crossorigin="anonymous"></script>
     <script src="./scripts/index.js" defer type="module" ></script>
 </head>
 <body>
     <div class="game-container">
         <div class="game game-cover">
-
             <button id="start">START</button>
         </div>
         <div class="game game-screen">
-            <button id="exit">EXIT</button>
+            <button id="exit">
+                <i class="fas fa-window-close"></i>
+            </button>
+            <div id="dialog-cover">
+                <div id="warning" class="dialog-box">
+                    <div class="dialog-content">
+                        <h4>Are you sure you want to exit?</h4>
+                        <img src = "./images/snake-sad.png" />
+                    </div>
+                    <div id="dialog-box-buttons">
+                        <button id="confirm-btn" class="dialog-btn">Yes</button>
+                        <button id="cancel-btn" class="dialog-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

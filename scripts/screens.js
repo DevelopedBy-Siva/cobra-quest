@@ -1,3 +1,5 @@
+import { removeDialogBox } from "./dialog.js";
+
 let START_GAME = false;
 const ANIMATION_SPEED = 35;
 
@@ -42,6 +44,7 @@ export const moveBetweenScreens = async() => {
     disableButtons(); // Disable Buttons
     await screenAnimation();
     START_GAME = START_GAME ? false : true;
+    if(!START_GAME) removeDialogBox();
 }
 
 // Screen Scroll Animation
