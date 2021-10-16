@@ -3,6 +3,13 @@ const ANIMATION_SPEED = 35;
 
 const gameContainer = document.getElementsByClassName("game-container");
 
+// Game Start/ Exit Buttons
+const startButton = document.getElementById("start");
+const exitButton = document.getElementById("exit");
+
+// disable Exit button for the First Launch
+exitButton.disabled = true;
+
 // Optimise browser performance by triggering the event only after few "ms"
 const handleWindowResize = () => {
     let execute = false;
@@ -31,12 +38,13 @@ window.addEventListener("resize", resizeScreen);
 
 // Move between the screen based on button "CLICK"
 export const moveBetweenScreens = async() => {
-
     const screenAnimation = handleScreenAnimation(!START_GAME ? 0 : window.innerHeight);
+    disableButtons(); // Disable Buttons
     await screenAnimation();
     START_GAME = START_GAME ? false : true;
 }
 
+// Screen Scroll Animation
 const handleScreenAnimation = (current) => {
 
     let position = current;
@@ -46,6 +54,7 @@ const handleScreenAnimation = (current) => {
     }
 }
 
+// Screen Scroll Animation
 const startAnimate = (callback, position, request) => {
 
     if(!START_GAME) {
@@ -63,8 +72,20 @@ const startAnimate = (callback, position, request) => {
     request = requestAnimationFrame(() => startAnimate(callback, position, request));
 }
 
+// End Scroll Animation
 const endAnimate = (position, request, callback) => {
     gameContainer[0].scrollTop = position;
     cancelAnimationFrame(request)
     callback();
+}
+
+// Disable Buttons
+const disableButtons = () => {
+    if(START_GAME){
+        startButton.disabled = false;
+        exitButton.disabled = true;
+    } else {
+        startButton.disabled = true;
+        exitButton.disabled = false;
+    }
 }
