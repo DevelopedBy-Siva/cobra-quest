@@ -45,6 +45,12 @@ export const addPlayer = (allPlayers) => {
 
     if(added){
         removeAlreadyPresent();
+
+        // Remove No User Message if present
+        try{
+            playerList.removeChild(playerList.getElementsByClassName("no-user")[0]);
+        }catch(ex){}
+
         createPlayerElements(player)
 
         // Save to Local Storage
@@ -124,6 +130,11 @@ export const createPlayerElements = (player) => {
 // Remove element from the storage
 function removePlayer(player) {
     allPlayers.removePlayer(player);
+
+    // Show message when no players are found
+    if(allPlayers.getAllPlayers().length === 0)
+        noPlayerMessage();
+
 }
 
 const playerAlreadyPresent = () => {
@@ -191,10 +202,14 @@ export function loadPlayers(){
         LOAD_DATA = false;
         addPlayerBtn.innerHTML= "Add";
     
+        // Create a Loading spinner
         playerList.removeChild(playerList.getElementsByClassName("loading-spinner-wrap")[0]);
 
         const players = [...allPlayers.getAllPlayers()];
     
+        // No user message when no users are found from storage
+        if(players.length === 0) noPlayerMessage();
+
         // Create DOM elements using Loaded data
         if(players.length > 0) {
             players.forEach( i => {
@@ -217,5 +232,14 @@ function createLoadingElement() {
     spinner.className = "loading-spinner-content fas fa-spinner";
 
     element.appendChild(spinner);
+    playerList.appendChild(element);
+}
+
+// Shows "No Players" message
+function noPlayerMessage(){
+    const element = document.createElement("h4");
+    element.className = "no-user";
+    element.innerText = "No players found";
+
     playerList.appendChild(element);
 }

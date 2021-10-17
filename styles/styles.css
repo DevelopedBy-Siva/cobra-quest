@@ -307,6 +307,18 @@ body{
     }
 }
 
+.user-list-container .no-user {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    font-family: 'Lato', sans-serif;
+    margin: 10px 0 0 0;
+    padding: 0;
+    color: grey;
+    text-align: center;
+}
+
 .add-user #add-user-btn:hover {
     background-color: white;
     color: rgb(1, 170, 1);
