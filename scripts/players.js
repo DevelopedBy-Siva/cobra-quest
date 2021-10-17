@@ -8,6 +8,8 @@ const userInput = document.getElementById("new-user-input");
 
 const playerList = document.getElementsByClassName("user-list-container")[0];
 
+let scrollPosition=0;
+
 export const handlePlayers = () => {
     userCover.style.display = "block";
     playerList.scrollTop = 0;
@@ -125,20 +127,37 @@ function removeAlreadyPresent() {
     }catch(ex){}
 }
 
+const scrollDelay = delayNewScrollPosition();
+
+// Update the scroll position on Scroll
+playerList.addEventListener("scroll", (e)=>{
+    scrollDelay(e);
+});
+
+// Delay setting the new Scroll Position
+function delayNewScrollPosition(){
+    let clear;
+    return function(...args){
+        if(clear)
+            clearTimeout(clear);
+        setTimeout(()=>{
+            scrollPosition = args[0].target.scrollTop;
+            console.log(scrollPosition)
+        }, 1000)
+    }
+}
+
 function addPlayerAnimation(){
-
-    let position = 0;
     let req;
-
     return function animate(){
 
-        position += PLAYER_LIST_SCROLL_SPEED;
-        if(req && position >= playerList.scrollHeight) {
-            playerList.scrollTop = position;
+        scrollPosition += PLAYER_LIST_SCROLL_SPEED;
+        if(req && scrollPosition >= playerList.scrollHeight) {
+            playerList.scrollTop = scrollPosition;
             cancelAnimationFrame(req);
             return;
         } 
-        playerList.scrollTop = position;
+        playerList.scrollTop = scrollPosition;
         req = requestAnimationFrame(animate);
     }
 }
