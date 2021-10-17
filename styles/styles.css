@@ -308,7 +308,7 @@ body{
     margin-top: 10px;
     overflow-x: hidden;
     overflow-y: auto;
-    height: 215px;
+    height: 220px;
 }
 
 .add-user .user-list .user-list-container::-webkit-scrollbar {
@@ -347,7 +347,7 @@ body{
     align-items: center;
     justify-content: space-between;
     background: #bbbbbb2f;
-    animation: add-player-anim 0.5s 1 ease-in-out forwards;
+    animation: add-player-anim 0.6s 1 ease-in-out forwards;
     box-sizing: border-box;
 }
 

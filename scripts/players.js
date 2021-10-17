@@ -1,11 +1,16 @@
 import { allPlayers } from "./index.js";
 import {Player } from "./player_s_Object_s.js";
 
+const PLAYER_LIST_SCROLL_SPEED = 10;
+
 const userCover = document.getElementById("user-cover");
 const userInput = document.getElementById("new-user-input");
 
+const playerList = document.getElementsByClassName("user-list-container")[0];
+
 export const handlePlayers = () => {
     userCover.style.display = "block";
+    playerList.scrollTop = 0;
 }
 
 export const handlePlayersClose = () => {
@@ -16,7 +21,6 @@ export const handlePlayersClose = () => {
 }
 
 // Add new Player
-
 const addPlayerButton = document.getElementById("add-user-btn");
 
 export const handleInputChange = (e) => {
@@ -49,7 +53,8 @@ export const addPlayer = (allPlayers) => {
     }
 }
 
-const playerList = document.getElementsByClassName("user-list-container")[0];
+// Handle scroll when a new play gets added
+const animatePlayer = addPlayerAnimation();
 
 export const createPlayerElements = (player) => {
 
@@ -87,6 +92,9 @@ export const createPlayerElements = (player) => {
     // Append to the Player container
     playerList.appendChild(listTag)
 
+    // Scroll to the bottom when a new play gets added
+    animatePlayer();
+
     // Add click event for removing players
     removeElement.addEventListener("click", () => {
         listTag.remove();
@@ -115,6 +123,24 @@ function removeAlreadyPresent() {
     try{
         document.getElementById("player-present-error").remove();
     }catch(ex){}
+}
+
+function addPlayerAnimation(){
+
+    let position = 0;
+    let req;
+
+    return function animate(){
+
+        position += PLAYER_LIST_SCROLL_SPEED;
+        if(req && position >= playerList.scrollHeight) {
+            playerList.scrollTop = position;
+            cancelAnimationFrame(req);
+            return;
+        } 
+        playerList.scrollTop = position;
+        req = requestAnimationFrame(animate);
+    }
 }
 
 
