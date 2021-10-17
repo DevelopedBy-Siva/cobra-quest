@@ -102,6 +102,20 @@ export const createPlayerElements = (player) => {
         listTag.remove();
         removePlayer(player.name)
     });
+
+    // Set Active Player
+    listTag.addEventListener("click", () => {
+        allPlayers.setAsActivePlayer(player.name);
+        const tags = document.querySelectorAll(".add-user .user-list li");
+        tags.forEach( i => {
+            const name = i.getElementsByClassName("username")[0].innerHTML;
+            const active = allPlayers.getActivePlayer();
+            if(active && (name === active.name))
+                i.classList.add("user-selected");
+            else
+                i.classList.remove("user-selected");
+        });
+    })
 }
 
 // Remove element from the storage

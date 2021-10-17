@@ -391,12 +391,12 @@ body{
     color: grey; 
 }
 
-#user-selected {
-    background-color: #BA8B02;
+.user-selected {
+    background-color: #00B6FF !important;
 }
 
-#user-selected span {
-    color: white;
+.user-selected span {
+    color: white !important;
 }
 .add-user .add-user-close {
     position: absolute;

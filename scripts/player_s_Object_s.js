@@ -3,6 +3,7 @@ class Player {
     constructor(name, score){
         this.name = name;
         this.score = score;
+        this.active = false;
     }
 
     getInfo() {
@@ -15,6 +16,7 @@ class Player {
     setScore(score) {
         this.score = score
     }
+
 }
 
 class AllPlayers {
@@ -48,6 +50,22 @@ class AllPlayers {
     removePlayer(name){
         const newPlayers = this.players.filter( val => val.name !== name );
         this.players = [...newPlayers];
+    }
+
+    setAsActivePlayer(name){
+
+        this.players.forEach( i => {
+            if(i.name === name)
+                i.active = !i.active;
+            else
+                i.active = false;
+        });
+        this.savePlayersToLocalStorage();
+    }
+
+    getActivePlayer(){
+        const player = this.players.filter( i => i.active);
+        return player[0];
     }
 
     loadPlayersFromStorage(){
