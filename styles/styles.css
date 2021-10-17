@@ -270,19 +270,47 @@ body{
 }
 
 .add-user #add-user-btn {
-    background-color: green;
+    background-color: rgb(1, 170, 1);
     color: white;
     width: 80px;
     height: 35px;
     display: block;
     margin: auto;
     outline: none;
-    border: 1px solid green;
+    border: 1px solid rgb(1, 170, 1);
     border-radius: 5px;
     margin-top: 10px;
     font-family: 'Lato', sans-serif;
     cursor: pointer;
     font-size: 18px;
+    transition: all 0.2s ease-in-out;
+    font-weight: bold;
+}
+.loading-spinner-wrap {
+    text-align: center;
+    color: #3b3b3b;
+}
+
+.loading-spinner {
+    animation: loading-spinner 1s infinite linear;
+    color: white;
+}
+
+.loading-spinner-content {
+    font-size: 25px;
+    animation: loading-spinner 1s infinite linear;
+}
+
+@keyframes loading-spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.add-user #add-user-btn:hover {
+    background-color: white;
+    color: rgb(1, 170, 1);
+    border: 1px solid rgb(1, 170, 1);
 }
 
 .add-user .user-list {
@@ -392,7 +420,7 @@ body{
 }
 
 .user-selected {
-    background-color: #00B6FF !important;
+    background-color: #3b3b3b !important;
 }
 
 .user-selected span {
@@ -427,3 +455,4 @@ body{
     margin-left: auto;
     margin-right: auto;
 }
+

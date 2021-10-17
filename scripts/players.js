@@ -2,6 +2,7 @@ import { allPlayers } from "./index.js";
 import {Player } from "./player_s_Object_s.js";
 
 const PLAYER_LIST_SCROLL_SPEED = 10;
+let LOAD_DATA = true;
 
 const userCover = document.getElementById("user-cover");
 const userInput = document.getElementById("new-user-input");
@@ -60,62 +61,64 @@ const animatePlayer = addPlayerAnimation();
 
 export const createPlayerElements = (player) => {
 
-    // Create Playername element
-    const nameElement = document.createElement("span");
-    nameElement.className = "username";
-    nameElement.appendChild(document.createTextNode(player.name));
+    if(!LOAD_DATA){
+        // Create Playername element
+        const nameElement = document.createElement("span");
+        nameElement.className = "username";
+        nameElement.appendChild(document.createTextNode(player.name));
 
-    // Create Score element
-    const scoreElement = document.createElement("span");
-    scoreElement.className = "user-score";
-    scoreElement.appendChild(document.createTextNode(`Highscore: ${player.score}`));
+        // Create Score element
+        const scoreElement = document.createElement("span");
+        scoreElement.className = "user-score";
+        scoreElement.appendChild(document.createTextNode(`Highscore: ${player.score}`));
 
-    // Create a container element to wrap Player name and score
-    const detailsContainer = document.createElement("div");
-    detailsContainer.appendChild(nameElement);
-    detailsContainer.appendChild(scoreElement);
+        // Create a container element to wrap Player name and score
+        const detailsContainer = document.createElement("div");
+        detailsContainer.appendChild(nameElement);
+        detailsContainer.appendChild(scoreElement);
 
-    // Player Remove Elements
-    // 1. Remove button
-    const removeElement = document.createElement("button");
-    removeElement.className = "remove-user";
-    // 2. Remove button icon
-    const removeIcon = document.createElement("i");
-    removeIcon.className = "fas fa-trash-alt";
-    removeElement.appendChild(removeIcon);
+        // Player Remove Elements
+        // 1. Remove button
+        const removeElement = document.createElement("button");
+        removeElement.className = "remove-user";
+        // 2. Remove button icon
+        const removeIcon = document.createElement("i");
+        removeIcon.className = "fas fa-trash-alt";
+        removeElement.appendChild(removeIcon);
 
-    // List element to wrap all the sub elements
-    const listTag = document.createElement("li");
+        // List element to wrap all the sub elements
+        const listTag = document.createElement("li");
 
-    // Append all the sub elements into the list element
-    listTag.appendChild(detailsContainer);
-    listTag.appendChild(removeElement);
+        // Append all the sub elements into the list element
+        listTag.appendChild(detailsContainer);
+        listTag.appendChild(removeElement);
 
-    // Append to the Player container
-    playerList.appendChild(listTag)
+        // Append to the Player container
+        playerList.appendChild(listTag)
 
-    // Scroll to the bottom when a new play gets added
-    animatePlayer();
+        // Scroll to the bottom when a new play gets added
+        animatePlayer();
 
-    // Add click event for removing players
-    removeElement.addEventListener("click", () => {
-        listTag.remove();
-        removePlayer(player.name)
-    });
-
-    // Set Active Player
-    listTag.addEventListener("click", () => {
-        allPlayers.setAsActivePlayer(player.name);
-        const tags = document.querySelectorAll(".add-user .user-list li");
-        tags.forEach( i => {
-            const name = i.getElementsByClassName("username")[0].innerHTML;
-            const active = allPlayers.getActivePlayer();
-            if(active && (name === active.name))
-                i.classList.add("user-selected");
-            else
-                i.classList.remove("user-selected");
+        // Add click event for removing players
+        removeElement.addEventListener("click", () => {
+            listTag.remove();
+            removePlayer(player.name)
         });
-    })
+
+        // Set Active Player
+        listTag.addEventListener("click", () => {
+            allPlayers.setAsActivePlayer(player.name);
+            const tags = document.querySelectorAll(".add-user .user-list li");
+            tags.forEach( i => {
+                const name = i.getElementsByClassName("username")[0].innerHTML;
+                const active = allPlayers.getActivePlayer();
+                if(active && (name === active.name))
+                    i.classList.add("user-selected");
+                else
+                    i.classList.remove("user-selected");
+            });
+        })
+    }
 }
 
 // Remove element from the storage
@@ -176,4 +179,43 @@ function addPlayerAnimation(){
     }
 }
 
+export function loadPlayers(){
 
+    const addPlayerBtn = document.getElementById("add-user-btn");
+
+    try{
+        createLoadingElement();
+        
+        // Get Players from LocalStorage (if available)
+        allPlayers.loadPlayersFromStorage();
+        LOAD_DATA = false;
+        addPlayerBtn.innerHTML= "Add";
+    
+        playerList.removeChild(playerList.getElementsByClassName("loading-spinner-wrap")[0]);
+
+        const players = [...allPlayers.getAllPlayers()];
+    
+        // Create DOM elements using Loaded data
+        if(players.length > 0) {
+            players.forEach( i => {
+                createPlayerElements(i);
+            });
+        }
+        
+    } catch(ex){
+        LOAD_DATA = false;
+        addPlayerBtn.innerHTML= "Add";
+    }
+}
+
+// Loading Element
+function createLoadingElement() { 
+    const element = document.createElement("h5");
+    element.className = "loading-spinner-wrap";
+
+    const spinner = document.createElement("i");
+    spinner.className = "loading-spinner-content fas fa-spinner";
+
+    element.appendChild(spinner);
+    playerList.appendChild(element);
+}
