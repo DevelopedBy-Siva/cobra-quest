@@ -17,9 +17,9 @@ body{
 }
 
 .game-cover{
-    background: #BA8B02; 
-    background: -webkit-linear-gradient(to right, #3b3b3b, #BA8B02);
-    background: linear-gradient(to right, #3b3b3b, #BA8B02); 
+    background: #1D4350; 
+    background: -webkit-linear-gradient(to right, #A43931, #1D4350);
+    background: linear-gradient(to right, #A43931, #1D4350); 
     position: relative;
 }
 
@@ -48,7 +48,9 @@ body{
 }
 
 .game-screen {
-    background-color: rgba(59, 59, 59);
+    background: #232526;
+    background: -webkit-linear-gradient(to right, #414345, #232526);
+    background: linear-gradient(to right, #414345, #232526);
     position: relative;
 }
 
