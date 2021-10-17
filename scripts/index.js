@@ -27,3 +27,7 @@ const allPlayers = new AllPlayers();
 
 addPlayerBtn.addEventListener("click", () => addPlayer(allPlayers));
 playerInput.addEventListener("input", handleInputChange);
+
+export {
+    allPlayers
+}

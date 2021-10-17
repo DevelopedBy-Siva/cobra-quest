@@ -1,3 +1,4 @@
+import { allPlayers } from "./index.js";
 import {Player } from "./player_s_Object_s.js";
 
 const userCover = document.getElementById("user-cover");
@@ -51,47 +52,63 @@ export const addPlayer = (allPlayers) => {
 const playerList = document.getElementsByClassName("user-list-container")[0];
 
 export const createPlayerElements = (player) => {
-    const listTag = document.createElement("li");
 
+    // Create Playername element
     const nameElement = document.createElement("span");
     nameElement.className = "username";
-
     nameElement.appendChild(document.createTextNode(player.name));
 
+    // Create Score element
     const scoreElement = document.createElement("span");
     scoreElement.className = "user-score";
-
     scoreElement.appendChild(document.createTextNode(`Highscore: ${player.score}`));
 
+    // Create a container element to wrap Player name and score
     const detailsContainer = document.createElement("div");
     detailsContainer.appendChild(nameElement);
     detailsContainer.appendChild(scoreElement);
 
     // Player Remove Elements
+    // 1. Remove button
     const removeElement = document.createElement("button");
     removeElement.className = "remove-user";
-
+    // 2. Remove button icon
     const removeIcon = document.createElement("i");
     removeIcon.className = "fas fa-trash-alt";
-
     removeElement.appendChild(removeIcon);
 
+    // List element to wrap all the sub elements
+    const listTag = document.createElement("li");
+
+    // Append all the sub elements into the list element
     listTag.appendChild(detailsContainer);
     listTag.appendChild(removeElement);
 
+    // Append to the Player container
     playerList.appendChild(listTag)
+
+    // Add click event for removing players
+    removeElement.addEventListener("click", () => {
+        listTag.remove();
+        removePlayer(player.name)
+    });
+}
+
+// Remove element from the storage
+function removePlayer(player) {
+    allPlayers.removePlayer(player);
 }
 
 const playerAlreadyPresent = () => {
 
-        const container = document.getElementsByClassName("add-user")[0];
-        const btn = document.getElementById("add-user-btn");
-        
-        const element = document.createElement("span");
-        element.id = "player-present-error";
+    const container = document.getElementsByClassName("add-user")[0];
+    const btn = document.getElementById("add-user-btn");
+    
+    const element = document.createElement("span");
+    element.id = "player-present-error";
 
-        element.innerText = "Player already present";
-        container.insertBefore(element, btn);
+    element.innerText = "Player already present";
+    container.insertBefore(element, btn);
 }
 
 function removeAlreadyPresent() {
