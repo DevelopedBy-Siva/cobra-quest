@@ -8,6 +8,7 @@ export const handlePlayers = () => {
 }
 
 export const handlePlayersClose = () => {
+    removeAlreadyPresent();
     userCover.style.display = "none";
     userInput.value= ""
     addPlayerButton.disabled = true;
@@ -35,13 +36,15 @@ export const addPlayer = (allPlayers) => {
     const added = allPlayers.addPlayer(player);
 
     if(added){
-
+        removeAlreadyPresent();
         createPlayerElements(player)
 
         // Save to Local Storage
         allPlayers.savePlayersToLocalStorage();
         addPlayerButton.disabled = true;
         userInput.value = "";
+    } else {
+        playerAlreadyPresent();
     }
 }
 
@@ -78,4 +81,23 @@ export const createPlayerElements = (player) => {
 
     playerList.appendChild(listTag)
 }
+
+const playerAlreadyPresent = () => {
+
+        const container = document.getElementsByClassName("add-user")[0];
+        const btn = document.getElementById("add-user-btn");
+        
+        const element = document.createElement("span");
+        element.id = "player-present-error";
+
+        element.innerText = "Player already present";
+        container.insertBefore(element, btn);
+}
+
+function removeAlreadyPresent() {
+    try{
+        document.getElementById("player-present-error").remove();
+    }catch(ex){}
+}
+
 
