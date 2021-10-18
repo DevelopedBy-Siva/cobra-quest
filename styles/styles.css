@@ -17,9 +17,9 @@ body{
 }
 
 .game-cover{
-    background: #1D4350; 
-    background: -webkit-linear-gradient(to right, #A43931, #1D4350);
-    background: linear-gradient(to right, #A43931, #1D4350); 
+    background: #F7971E; 
+    background: -webkit-linear-gradient(to right, #FFD200, #F7971E); 
+    background: linear-gradient(to right, #FFD200, #F7971E); 
     position: relative;
 }
 
@@ -54,25 +54,6 @@ body{
     position: relative;
 }
 
-.game-title {
-    text-align: center;
-    width: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    cursor: default;
-}
-
-.game-title h4 {
-    padding: 0;
-    margin: 0;
-    font-family: 'ZCOOL KuaiLe', cursive;
-    color: white;
-    font-size: 64px;
-    font-weight: bold;
-}
-
 .game-screen #exit {
     cursor: pointer;
     outline: none;
@@ -88,7 +69,7 @@ body{
 }
 
 .game #navbar {
-    width: 98%;
+    width: 95%;
     height: 50px;
     position: absolute;
     top: 0;
@@ -107,7 +88,7 @@ body{
 }
 
 .game #navbar #score i {
-    color: #BA8B02;
+    color: #FFD200;
     font-size: 30px;
 }
 
@@ -117,6 +98,34 @@ body{
     font-size: 32px;
     color: white;
     letter-spacing: 10px;
+}
+
+.game-cover .game-title {
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-40%);
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-cover .game-title h4 {
+    padding: 0;
+    margin: 0;
+    font-family: 'ZCOOL KuaiLe', cursive;
+    color: white;
+    font-size: 52px;
+    font-weight: bold;
+}
+
+.game-cover .game-title img {
+    width: 300px;
+    height: 300px;
 }
 
 #dialog-cover{
@@ -185,13 +194,13 @@ body{
 
 #cancel-btn {
     background-color: white;
-    border: 2px solid #BA8B02;
+    border: 2px solid #FFD200;
     color: #3b3b3b;
 }
 
 #cancel-btn:focus {
     border: 2px solid #00B6FF;
-    background-color: #BA8B02;
+    background-color: #FFD200;
     color: white;
 }
 
@@ -231,7 +240,7 @@ body{
 }
 
 #current-user-score-title {
-    font-size: 10px;
+    font-size: 14px;
 }
 
 .player-wrapper .player-sub-wrapper span {
@@ -263,7 +272,6 @@ body{
     font-size: 18px;
     color: #3b3b3b;
 }
-
 
 .add-user {
     width: 95%;
@@ -371,6 +379,7 @@ body{
     overflow: hidden;
     height: 260px;
 }
+
 .add-user .user-list #user-list-title {
     width: 100%;
     display: block;
@@ -519,4 +528,114 @@ body{
     justify-content: center;
     align-items: center;
     cursor: default;
+}
+
+@media (max-width : 600px){
+
+    .game-cover .game-title h4 {
+        font-size: 42px;
+    }
+    
+    .game-cover .game-title img {
+        width: 200px;
+        height: 200px;
+    }
+    .game-cover #start{
+        width: 100px;
+        height: 40px;
+        font-size: 16px;
+        letter-spacing: 2px;
+    }
+    .game-cover #warn-the-player {
+        font-size: 12px;
+        height: 35px;
+    }
+    .game #navbar #score {
+        width: 120px;
+    }
+    .game #navbar #score i {
+        font-size: 18px;
+    }
+    .game #navbar #score span {
+        font-size: 18px;
+        letter-spacing: 4px;
+    }
+    .game-screen #exit {
+        color: white;
+        width: 40px;
+        height: 20px;
+        font-size: 8px;
+    }
+    .dialog-box h4 {
+        font-size: 14px;
+    }
+    .dialog-box {
+        position: absolute;
+        height: 120px;
+    }
+    .dialog-btn {
+        margin: 10px;
+        width: 50px;
+        height: 25px;
+        font-size: 10px;
+    }
+    #warning img {
+        width: 30px;
+        height: 30px;
+    }
+    .add-user {
+        max-width: 450px;
+        height: 350px;
+    }
+    
+    .add-user input {
+        margin-top: 15px;
+        height: 25px;
+        font-size: 18px;
+    }
+    .add-user #add-user-btn {
+        width: 60px;
+        height: 25px;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+    .add-user .user-list .user-list-container {
+        margin-top: 10px;
+        height: 200px;
+    }    
+    .add-user .user-list li {
+        height: 45px;
+        padding: 0px 6px;
+    }
+    .add-user .user-list .username {
+        font-size: 14px;
+    }
+    
+    .add-user .user-list .user-score {
+        font-size: 10px;
+    }
+    .add-user .user-list-container .remove-user{
+        font-size: 15px;
+    }
+    .player-wrapper {
+        top: 0px;
+        width: 95%;
+    }
+    #players {
+        width: 30px;
+        height: 30px;
+        font-size: 15px;
+    }
+    .add-user .add-user-close {
+        right: -8px;
+        top: -10px;
+        width: 18px;
+        height: 18px;
+    }
+    .add-user .add-user-close i {
+        font-size: 20px;
+    }
+    #current-user-score-title {
+        font-size: 10px;
+    }
 }
