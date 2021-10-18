@@ -1,5 +1,6 @@
 import { allPlayers } from "./index.js";
 import {Player } from "./player_s_Object_s.js";
+import { removePlayerWarningFromDOM } from "./screens.js";
 
 const PLAYER_LIST_SCROLL_SPEED = 10;
 let LOAD_DATA = true;
@@ -113,6 +114,7 @@ export const createPlayerElements = (player) => {
 
         // Set Active Player
         listTag.addEventListener("click", () => {
+            removePlayerWarningFromDOM();
             allPlayers.setAsActivePlayer(player.name);
             const tags = document.querySelectorAll(".add-user .user-list li");
             tags.forEach( i => {

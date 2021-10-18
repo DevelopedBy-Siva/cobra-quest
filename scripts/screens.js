@@ -1,4 +1,5 @@
 import { removeDialogBox } from "./dialog.js";
+import { allPlayers } from "./index.js";
 
 let START_GAME = false;
 const ANIMATION_SPEED = 35;
@@ -40,11 +41,19 @@ window.addEventListener("resize", resizeScreen);
 
 // Move between the screen based on button "CLICK"
 export const moveBetweenScreens = async() => {
-    const screenAnimation = handleScreenAnimation(!START_GAME ? 0 : window.innerHeight);
-    disableButtons(); // Disable Buttons
-    await screenAnimation();
-    START_GAME = START_GAME ? false : true;
-    if(!START_GAME) removeDialogBox();
+    if(allPlayers.getActivePlayer()){
+        // Checks if the Player Warning is present and is removed
+        removePlayerWarningFromDOM();
+
+        const screenAnimation = handleScreenAnimation(!START_GAME ? 0 : window.innerHeight);
+        disableButtons(); // Disable Buttons
+        await screenAnimation();
+        START_GAME = START_GAME ? false : true;
+        if(!START_GAME) removeDialogBox();
+    } else {
+        // Warn the Player
+        showPlayerWarning()
+    }
 }
 
 // Screen Scroll Animation
@@ -91,4 +100,25 @@ const disableButtons = () => {
         startButton.disabled = true;
         exitButton.disabled = false;
     }
+}
+
+// Show player warning in the DOM
+function showPlayerWarning() {
+
+    const containerElement = document.createElement("div");
+    containerElement.id = "warn-the-player";
+    
+    const warningElement = document.createElement("span");
+    warningElement.innerText = "Please select or add a Player";
+
+    containerElement.appendChild(warningElement);
+
+    document.getElementsByClassName("game-cover")[0].appendChild(containerElement);
+}
+
+// Remove Player warning in the DOM(if present)
+export function removePlayerWarningFromDOM() {
+    try{
+        document.getElementById("warn-the-player").remove();
+    } catch(ex){}
 }
