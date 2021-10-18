@@ -207,6 +207,50 @@ body{
     display: flex;
     justify-content: center;
     align-items: center; 
+    overflow: hidden;
+}
+
+.player-wrapper {
+    box-sizing: border-box;
+    position: absolute;
+    top: 10px;
+    display: flex;
+    width: 98%;
+    height: 60px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    align-items: center;
+    align-content: center;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 1px;
+    cursor: default;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+#current-user-score-title {
+    font-size: 10px;
+}
+
+.player-wrapper .player-sub-wrapper span {
+    margin-left: 5px;
+    text-transform: capitalize;
+}
+
+.player-sub-wrapper {
+    width: 60%;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player-wrapper #current-user-score{
+    width: 37%;
+    text-align: right;
+    cursor: default;
+    display: block;
 }
 
 #players {
@@ -215,19 +259,11 @@ body{
     height: 40px;
     border: 1px solid white;
     outline: none;
-    position: absolute;
-    top: 10px;
-    left: 10px;
     border-radius: 50%;
     font-size: 18px;
     color: #3b3b3b;
 }
 
-#players:hover {
-    background: #3b3b3b;
-    color: white;
-    box-shadow: 0 0 15px #00B6FF; 
-}
 
 .add-user {
     width: 95%;

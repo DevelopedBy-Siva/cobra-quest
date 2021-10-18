@@ -123,6 +123,7 @@ export const createPlayerElements = (player) => {
                 else
                     i.classList.remove("user-selected");
             });
+            createCurrentPlayer();
         })
     }
 }
@@ -199,6 +200,10 @@ export function loadPlayers(){
         
         // Get Players from LocalStorage (if available)
         allPlayers.loadPlayersFromStorage();
+
+        // Show current player on the screen
+        createCurrentPlayer();
+
         LOAD_DATA = false;
         addPlayerBtn.innerHTML= "Add";
     
@@ -216,6 +221,17 @@ export function loadPlayers(){
                 createPlayerElements(i);
             });
         }
+
+        // Set Active Players from Storage
+        const tags = document.querySelectorAll(".add-user .user-list li");
+        const active = allPlayers.getActivePlayer();
+        tags.forEach( i => {
+            const name = i.getElementsByClassName("username")[0].innerHTML;
+            if(active && (name === active.name))
+                i.classList.add("user-selected");
+            else
+                i.classList.remove("user-selected");
+        });
         
     } catch(ex){
         LOAD_DATA = false;
@@ -242,4 +258,43 @@ function noPlayerMessage(){
     element.innerText = "No players found";
 
     playerList.appendChild(element);
+}
+
+// Create Current Player elements
+function createCurrentPlayer() {
+
+    try{
+
+        // Check the DOM has the current player details
+        currentPlayerExists();
+
+        const getPlayer = allPlayers.getActivePlayer();
+
+        // Current Player element
+        const playerElement = document.createElement("span");
+        playerElement.innerText = getPlayer.name;
+        playerElement.className = "current-user-name"
+
+        document.getElementsByClassName("player-sub-wrapper")[0].appendChild(playerElement);
+
+        // Current Player Score
+        const scoreElement = document.createElement("span");
+        scoreElement.className = "current-user-score";
+        scoreElement.innerHTML = `<span id="current-user-score-title">Score: </span> ${getPlayer.score}`;
+        
+        document.getElementsByClassName("player-wrapper")[0].appendChild(scoreElement);
+
+    }catch(ex){}
+}
+
+function currentPlayerExists() {
+    const userElement = document.getElementsByClassName("current-user-name")[0];
+    const scoreElement = document.getElementsByClassName("current-user-score")[0];
+
+    try{
+        if(userElement || scoreElement) {
+            userElement.remove();
+            scoreElement.remove();
+        }
+    }catch(ex){}
 }
