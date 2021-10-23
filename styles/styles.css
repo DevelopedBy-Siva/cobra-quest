@@ -530,6 +530,37 @@ body{
     cursor: default;
 }
 
+.game-screen {
+    background: #232526;
+    background: -webkit-linear-gradient(to right, #414345, #232526);
+    background: linear-gradient(to right, #414345, #232526);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-screen .game-container {
+    width: 120vmin;
+    height: 80vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-container #playground {
+    height: 100%;
+    width: calc(100% - 20px);
+    display: grid;
+    grid-template-columns: repeat(21, 1fr);
+    grid-template-rows: repeat(21, 1fr);
+    background-color: grey;
+}
+
+.game-container .snake-body {
+    background-color: red;
+}
+
 @media (max-width : 600px){
 
     .game-cover .game-title h4 {
