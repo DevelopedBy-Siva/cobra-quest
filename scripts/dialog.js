@@ -1,4 +1,5 @@
-import { moveBetweenScreens, removeKeyPressEvent } from "./screens.js";
+import { playerInput } from "./playerInput.js";
+import { moveBetweenScreens } from "./screens.js";
 
 // Dialog Box
 const dialogBox = document.getElementById("warning");
@@ -9,12 +10,12 @@ const confirmButton = document.getElementById("confirm-btn");
 const cancelButton = document.getElementById("cancel-btn");
 
 export const handleDialogBox = () => {
-    window.removeEventListener("keydown",removeKeyPressEvent)
+    window.removeEventListener("keydown",playerInput)
     dialogCover.style.display = "block";
     dialogBox.style.display = "block";
     cancelButton.focus();
     cancelButton.addEventListener("click", () => {
-        window.addEventListener("keydown",removeKeyPressEvent);
+        window.addEventListener("keydown",playerInput);
         removeDialogBox();
     });
     confirmButton.addEventListener("click", moveBetweenScreens);

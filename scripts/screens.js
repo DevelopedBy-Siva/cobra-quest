@@ -1,6 +1,7 @@
 import { removeDialogBox } from "./dialog.js";
 import { generateThePlayground } from "./game.js";
 import { allPlayers } from "./index.js";
+import { playerInput } from "./playerInput.js";
 
 let START_GAME = false;
 const ANIMATION_SPEED = 35;
@@ -133,17 +134,13 @@ export function removePlayerWarningFromDOM() {
 
 // Generate Snake
 function startTheGame() {
-    window.addEventListener("keydown",removeKeyPressEvent)
+    window.addEventListener("keydown",playerInput)
     const generate = generateThePlayground();
     requestAnimationFrame(generate)
 }
 
 function resetPlayground() {
-    window.removeEventListener("keydown",removeKeyPressEvent)
+    window.removeEventListener("keydown",playerInput)
     const snake = document.querySelectorAll(".snake-body");
     snake.forEach( element => playground.removeChild(element) )
-}
-
-export function removeKeyPressEvent(){
-    console.log("hello")
 }
