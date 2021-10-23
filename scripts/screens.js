@@ -1,10 +1,12 @@
 import { removeDialogBox } from "./dialog.js";
+import { generateThePlayground } from "./game.js";
 import { allPlayers } from "./index.js";
 
 let START_GAME = false;
 const ANIMATION_SPEED = 35;
 
 const gameContainer = document.getElementsByClassName("game-container");
+const playground = document.getElementById("playground");
 
 // Game Start/ Exit Buttons
 const startButton = document.getElementById("start");
@@ -41,6 +43,7 @@ window.addEventListener("resize", resizeScreen);
 
 // Move between the screen based on button "CLICK"
 export const moveBetweenScreens = async() => {
+    
     if(allPlayers.getActivePlayer()){
         // Checks if the Player Warning is present and is removed
         removePlayerWarningFromDOM();
@@ -49,7 +52,12 @@ export const moveBetweenScreens = async() => {
         disableButtons(); // Disable Buttons
         await screenAnimation();
         START_GAME = START_GAME ? false : true;
-        if(!START_GAME) removeDialogBox();
+        if(START_GAME) 
+            startTheGame();
+        else {
+            resetPlayground();
+            removeDialogBox();
+        }
     } else {
         // Warn the Player
         showPlayerWarning()
@@ -121,4 +129,21 @@ export function removePlayerWarningFromDOM() {
     try{
         document.getElementById("warn-the-player").remove();
     } catch(ex){}
+}
+
+// Generate Snake
+function startTheGame() {
+    window.addEventListener("keydown",removeKeyPressEvent)
+    const generate = generateThePlayground();
+    requestAnimationFrame(generate)
+}
+
+function resetPlayground() {
+    window.removeEventListener("keydown",removeKeyPressEvent)
+    const snake = document.querySelectorAll(".snake-body");
+    snake.forEach( element => playground.removeChild(element) )
+}
+
+export function removeKeyPressEvent(){
+    console.log("hello")
 }
