@@ -5,6 +5,7 @@ import { playerInput } from "./playerInput.js";
 
 let START_GAME = false;
 const ANIMATION_SPEED = 35;
+let PAUSE = false;
 
 const gameContainer = document.getElementsByClassName("game-container");
 const playground = document.getElementById("playground");
@@ -134,13 +135,23 @@ export function removePlayerWarningFromDOM() {
 
 // Generate Snake
 function startTheGame() {
-    window.addEventListener("keydown",playerInput)
     const generate = generateThePlayground();
     requestAnimationFrame(generate)
+    window.addEventListener("keydown",playerInput)
 }
 
+// Reset Playground on QUIT
 function resetPlayground() {
     window.removeEventListener("keydown",playerInput)
     const snake = document.querySelectorAll(".snake-body");
     snake.forEach( element => playground.removeChild(element) )
+}
+
+// Get/ Update game PAUSE
+export function getPause() {
+    return PAUSE;
+}
+
+export function changePause(val) {
+    PAUSE = val;
 }

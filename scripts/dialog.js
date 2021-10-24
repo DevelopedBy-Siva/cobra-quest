@@ -1,5 +1,5 @@
 import { playerInput } from "./playerInput.js";
-import { moveBetweenScreens } from "./screens.js";
+import { changePause, moveBetweenScreens } from "./screens.js";
 
 // Dialog Box
 const dialogBox = document.getElementById("warning");
@@ -10,6 +10,7 @@ const confirmButton = document.getElementById("confirm-btn");
 const cancelButton = document.getElementById("cancel-btn");
 
 export const handleDialogBox = () => {
+    changePause(true); // Pause the game
     window.removeEventListener("keydown",playerInput)
     dialogCover.style.display = "block";
     dialogBox.style.display = "block";
@@ -17,6 +18,7 @@ export const handleDialogBox = () => {
     cancelButton.addEventListener("click", () => {
         window.addEventListener("keydown",playerInput);
         removeDialogBox();
+        changePause(false); // Resume the game
     });
     confirmButton.addEventListener("click", moveBetweenScreens);
 }
