@@ -1,7 +1,7 @@
 import { getSnakeDirection } from "./playerInput.js";
 import { getPause } from "./screens.js";
 
-const SNAKE_SPEED = 4;
+const SNAKE_SPEED = 200;
 
 const coordinates = [
     {
@@ -12,19 +12,21 @@ const coordinates = [
 
 export function generateThePlayground(){
 
-    let lastRender = 0;
+    let run = true;
+    updateSnake();
+    drawSnake(playground);
 
-    return function play(time) {
-        requestAnimationFrame(play);
-        if( !getPause() ){
-            const sinceLastRender = (time - lastRender)/1000;
-            if(sinceLastRender < 1/SNAKE_SPEED) 
-                return;
-            
-            lastRender = time;
-            updateSnake();
-            drawSnake(playground);
+    return function play() {
+        if(run && !getPause()){
+            run = false;
+            setTimeout(() => {
+                run = true;
+                updateSnake();
+                drawSnake(playground);
+                requestAnimationFrame(play);
+            }, SNAKE_SPEED)
         }
+        else requestAnimationFrame(play);
     }
 }
 
