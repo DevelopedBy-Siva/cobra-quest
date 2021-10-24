@@ -3,15 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>Snake Game</title>
-    <link rel = "icon" href ="./images/snake.png" type = "image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato&family=ZCOOL+KuaiLe&family=Raleway:ital,wght@1,513&display=swap" rel="stylesheet">
+    <link rel = "icon" href ="./images/snake.webp" type = "image/x-icon">
     <link rel="stylesheet" href="./styles/styles.css">
-    <script src="https://kit.fontawesome.com/041abb8e24.js" crossorigin="anonymous"></script>
     <script src="./scripts/index.js" defer type="module" ></script>
+    <script src="https://kit.fontawesome.com/041abb8e24.js" defer crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="game-container">
@@ -36,7 +33,7 @@
                 </div>
             </div>
             <div class="game-title">
-                <img alt="snake_logo" src="./images/snake.png" />
+                <img alt="snake_logo" src="./images/snake.webp" />
                 <h4>S_N_A_K_E</h4>
             </div>
             <button id="start">START</button>
@@ -44,7 +41,7 @@
         <div class="game game-screen">
             <div id="navbar">
                 <div id="score">
-                    <img class="fas fa-egg" src="./images/apple.png" >
+                    <img alt="apple" src="./images/apple.webp" >
                     <span>000000</span>
                 </div>
                 <button id="exit">QUIT</button>
@@ -58,7 +55,7 @@
                 <div id="warning" class="dialog-box">
                     <div class="dialog-content">
                         <h4>Are you sure you want to exit?</h4>
-                        <img alt="snake-sad" src = "./images/snake-sad.png" />
+                        <img alt="snake-sad" src = "./images/snake-sad.webp" />
                     </div>
                     <div id="dialog-box-buttons">
                         <button id="confirm-btn" class="dialog-btn">Yes</button>
