@@ -3,6 +3,17 @@ import { addPlayer, handleInputChange, handlePlayers, handlePlayersClose, loadPl
 import { AllPlayers } from "./player_s_Object_s.js";
 import { moveBetweenScreens } from "./screens.js";
 
+// Handle Loading screen
+window.addEventListener("load" ,() => {
+    const container = document.getElementById("loading-screen");
+    const spinner = document.getElementById("loading-screen-spinner");
+    spinner.classList.add("loading-screen-animation-close");
+    container.classList.add("loading-screen-animation");
+    setTimeout(() => {
+        container.remove();
+    },1000)
+});
+
 // Game Start/ Exit Buttons
 const startButton = document.getElementById("start");
 const exitButton = document.getElementById("exit");
