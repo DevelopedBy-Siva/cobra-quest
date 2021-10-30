@@ -27,6 +27,7 @@ export function generateThePlayground(){
                 return;
 
             lastRender = time;
+            updateFood();
             updateSnake();
             drawSnake(playground);
         }
@@ -44,13 +45,23 @@ function updateSnake() {
 }
 
 function drawSnake(container) {
-    container.innerHTML = '';
+    
+    // Remove snake body from DOM
+    removeSnakeBody();
+
     coordinates.forEach( pos => {
         const block = document.createElement("div");
         block.style.gridRowStart = pos.y;
         block.style.gridColumnStart = pos.x;
         block.classList.add("snake-body")
         container.appendChild(block);
+    })
+}
+
+// Remove snake body from DOM
+function removeSnakeBody() {
+    document.querySelectorAll(".snake-body").forEach( element => {
+        element.remove();
     })
 }
 
@@ -63,4 +74,23 @@ export function resetSnake(){
     ]
     if(playAnimate)
         cancelAnimationFrame(playAnimate);
+}
+
+// Create Snake Food
+function updateFood() {
+    // Create container element for food
+    const element = document.createElement("div");
+    element.classList.add("snake-food");
+
+    // Create food image
+    const foodImg = document.createElement("img");
+    foodImg.alt = "snake-food";
+    foodImg.src = "../Snake-Game/images/apple.webp";
+
+    element.appendChild(foodImg);
+
+    element.style.gridRowStart = 4;
+    element.style.gridColumnStart = 4;
+
+    playground.appendChild(element);
 }
