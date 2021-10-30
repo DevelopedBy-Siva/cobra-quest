@@ -4,7 +4,7 @@ import { AllPlayers } from "./player_s_Object_s.js";
 import { moveBetweenScreens } from "./screens.js";
 
 const container = document.getElementById("loading-screen");
-const spinner = document.getElementById("loading-screen-spinner");
+const spinner = document.getElementById("loading-screen-spinner-wrapper");
 const playerWrapper = document.getElementsByClassName("player-wrapper")[0];
 const gameTitle = document.querySelector(".game-title h4");
 const gameImage = document.querySelector(".game-title img");
@@ -15,14 +15,13 @@ const exitButton = document.getElementById("exit");
 
 // Handle Loading screen
 window.addEventListener("load" ,() => {
-    
-    spinner.classList.add("loading-screen-animation-close");
+    spinner.classList.add("loading-screen-animation-spinner-hide");
     container.classList.add("loading-screen-animation");
     playerWrapper.classList.add("display-player-wrapper");
     gameTitle.classList.add("game-title-anim");
     gameImage.classList.add("game-logo-anim");
     startButton.classList.add("game-start-btn-anim");
-
+    
     setTimeout(() => {
         container.remove();
     },1000)

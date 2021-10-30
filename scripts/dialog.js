@@ -1,4 +1,5 @@
-import { playerInput } from "./playerInput.js";
+import { resetSnake } from "./game.js";
+import { playerInput, resetDirections } from "./playerInput.js";
 import { changePause, moveBetweenScreens } from "./screens.js";
 
 // Dialog Box
@@ -9,18 +10,24 @@ const dialogCover = document.getElementById("dialog-cover");
 const confirmButton = document.getElementById("confirm-btn");
 const cancelButton = document.getElementById("cancel-btn");
 
+cancelButton.addEventListener("click", () => {
+    window.addEventListener("keydown",playerInput);
+    removeDialogBox();
+    changePause(false); // Resume the game
+});
+confirmButton.addEventListener("click", () => {
+    moveBetweenScreens();
+    resetDirections();
+    resetSnake();        
+});
+
 export const handleDialogBox = () => {
     changePause(true); // Pause the game
     window.removeEventListener("keydown",playerInput)
     dialogCover.style.display = "block";
     dialogBox.style.display = "block";
     cancelButton.focus();
-    cancelButton.addEventListener("click", () => {
-        window.addEventListener("keydown",playerInput);
-        removeDialogBox();
-        changePause(false); // Resume the game
-    });
-    confirmButton.addEventListener("click", moveBetweenScreens);
+  
 }
 
 export const removeDialogBox = () => {

@@ -45,11 +45,9 @@ window.addEventListener("resize", resizeScreen);
 
 // Move between the screen based on button "CLICK"
 export const moveBetweenScreens = async() => {
-    
     if(allPlayers.getActivePlayer()){
         // Checks if the Player Warning is present and is removed
         removePlayerWarningFromDOM();
-
         const screenAnimation = handleScreenAnimation(!START_GAME ? 0 : window.innerHeight);
         disableButtons(); // Disable Buttons
         await screenAnimation();
@@ -67,8 +65,7 @@ export const moveBetweenScreens = async() => {
 }
 
 // Screen Scroll Animation
-const handleScreenAnimation = (current) => {
-
+const handleScreenAnimation = (current) => {    
     let position = current;
     let request;
     return function execute () {
@@ -81,7 +78,6 @@ const startAnimate = (callback, position, request) => {
 
     if(!START_GAME) {
         position += ANIMATION_SPEED;
-        
         if(position >= window.innerHeight)
             return endAnimate(position, request, callback);
 
@@ -136,15 +132,16 @@ export function removePlayerWarningFromDOM() {
 // Generate Snake
 function startTheGame() {
     const generate = generateThePlayground();
-    requestAnimationFrame(generate)
-    window.addEventListener("keydown",playerInput)
+    requestAnimationFrame(generate);
+    window.addEventListener("keydown",playerInput);
+    changePause(false);
 }
 
 // Reset Playground on QUIT
 function resetPlayground() {
-    window.removeEventListener("keydown",playerInput)
+    window.removeEventListener("keydown", playerInput);
     const snake = document.querySelectorAll(".snake-body");
-    snake.forEach( element => playground.removeChild(element) )
+    snake.forEach( element => playground.removeChild(element));
 }
 
 // Get/ Update game PAUSE
