@@ -15,11 +15,15 @@ cancelButton.addEventListener("click", () => {
     removeDialogBox();
     changePause(false); // Resume the game
 });
-confirmButton.addEventListener("click", () => {
+
+// Return Home
+confirmButton.addEventListener("click", returnHome);
+
+export function returnHome() {
     moveBetweenScreens();
     resetDirections();
-    resetSnake();        
-});
+    resetSnake();  
+}
 
 export const handleDialogBox = () => {
     changePause(true); // Pause the game

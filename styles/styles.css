@@ -8,6 +8,11 @@
     src: url("../fonts/FredokaOne-Regular.woff2");
 }
 
+@font-face {
+    font-family: 'Alfa Slab One';
+    src: url("../fonts//AlfaSlabOne-Regular.woff2");
+}
+
 :root {
 
     --snake-logo-anim-delay : 0.9s;
@@ -680,7 +685,86 @@ body{
     height: 90%;
 }
 
+.game-over {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(213, 213, 213, 0.6);
+}
+
+.game-over-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(59, 59, 59);
+    box-sizing: border-box;
+    border-radius: 10px;
+    width: 95%;
+    max-width: 600px;
+    height: 300px;
+    padding: 10px;
+}
+
+.game-over-content h2, 
+.game-over-content h3,
+.game-over-content h4,
+.game-over-content h5 {
+    padding: 0;
+    margin: 0;
+}
+
+.game-over-content h2 {
+    font-family: 'Fredoka';
+    font-size: 46px;
+    text-align: center;
+    color: white;
+    letter-spacing: 20px;
+    padding: 15px;
+}
+
+.game-over-content h3 {
+    color: #f7d71e;
+    font-size: 38px;
+    letter-spacing: 8px;
+    font-family: 'Alfa Slab One';
+    text-align: center;
+}
+
+.game-over-content h4 {
+    font-family: 'Fredoka';
+    color: rgb(0, 153, 255);
+    padding: 4px;
+    text-align: center;
+}
+
+.game-over-content button {
+    display: block;
+    width: 80px;
+    height: 30px;
+    margin: auto;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: red;
+    color: white;
+    margin-top: 15px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
 @media (max-width : 600px){
+
+    .game-over-content h2 {
+        font-size: 34px;
+    }
+
+    .game-over-content {
+        height: 280px;
+    }
 
     .game-cover .game-title h4 {
         font-size: 42px;
