@@ -9,13 +9,9 @@ import { changePause, updateScoreShownInDOM } from "./screens.js";
 const GRID_SIZE = Configs.GRID_SIZE;
 
 function checkDeath() {
-    const {x, y} = getSnakeBody()[0];
-    let dead = false;
-    if(x < 1 || x > GRID_SIZE || y < 1 || y > GRID_SIZE) {
-        changePause(true);
-        dead = true;
-    }
-    if(dead){
+    let outside = outsideGrid();
+    let intersect = snakeIntersection();
+    if(outside || intersect){
         window.removeEventListener("keydown", playerInput);
         const playerScore = getPlayerScoreObject();
         const highScore = allPlayers.getHighScore();;
@@ -25,6 +21,35 @@ function checkDeath() {
         updateScoreShownInDOM();
         createGameOverElement(highScore);
     }
+}
+
+function outsideGrid() {
+    const {x, y} = getSnakeBody()[0];
+    let dead = false;
+    if(x < 1 || x > GRID_SIZE || y < 1 || y > GRID_SIZE) {
+        changePause(true);
+        dead = true;
+    }
+    return dead;
+}
+
+function snakeIntersection() {
+    return onSnake(getSnakeBody()[0], { ignoreHead : true });
+}
+
+function onSnake(position, { ignoreHead = false } = {}) {
+    return getSnakeBody().some((segment, index) => {
+        if(ignoreHead && index === 0) return false;
+        return checkPosition(segment, position);
+    })
+}
+
+function checkPosition(pos1, pos2) {
+    if(pos1.x === pos2.x && pos1.y === pos2.y) {
+        changePause(true);
+        return true;
+    }
+    return false;
 }
 
 function createGameOverElement(highScore) {
