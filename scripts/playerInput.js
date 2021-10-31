@@ -8,7 +8,7 @@ let lastDirection = {
     y : 0
 }
 
-export function playerInput (input) {
+function playerInput (input) {
     switch (input.key) {
         case "ArrowDown":
             if(lastDirection.y !== 0) break;
@@ -31,16 +31,22 @@ export function playerInput (input) {
     }
 }
 
-export function getSnakeDirection() {
+function getSnakeDirection() {
     lastDirection = direction;
     return direction;
 }
 
-export function resetDirections() {
+function resetDirections() {
     const reset = {
         x : 0,
         y : 0
     };
     direction = {...reset};
     lastDirection = {...reset}
+}
+
+export {
+    getSnakeDirection,
+    resetDirections,
+    playerInput
 }

@@ -1,0 +1,7 @@
+export default {
+    GRID_SIZE : 21,
+    SNAKE_SPEED : 5,
+    SNAKE_INITIAL_POSITION : 11,
+    SNAKE_EXPANSION_RATE : 1,
+    FOOD_INITIAL_POSITION : 4
+}
