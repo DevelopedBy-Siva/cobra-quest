@@ -7,6 +7,7 @@ import { loadPlayers, setLoadData } from "./players.js";
 import { changePause, updateScoreShownInDOM } from "./screens.js";
 
 const GRID_SIZE = Configs.GRID_SIZE;
+const SCORE_LIMIT = Configs.SCORE_LIMIT;
 
 function checkDeath() {
     let outside = outsideGrid();
@@ -92,6 +93,16 @@ function createGameOverElement(highScore) {
 function resetTheGame(container) {
     refreshLocalStorage();
     returnHome(); // Back to Home Screen
+    const scoreElement = document.querySelector(".game-screen #score span");
+    scoreElement.innerHTML = (function() {
+        let limit = 0;
+        let score = ""; 
+        while(limit < SCORE_LIMIT) {
+            score += "0";
+            limit++;
+        }
+        return score;
+    })();
     setTimeout(() => {
         container.remove(); // Remove Game Over container
     }, 500);
