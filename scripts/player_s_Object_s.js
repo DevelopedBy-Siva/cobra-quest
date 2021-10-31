@@ -99,8 +99,11 @@ class AllPlayers {
     loadPlayersFromStorage(){
         try{
             const item = localStorage.getItem(this.storageKey);
-            this.players = JSON.parse(item);
-            return;
+            const parsed = JSON.parse(item);
+            if(parsed) {
+                this.players = JSON.parse(item);
+                return;
+            }
         }catch(ex){}
 
         this.players = [];
