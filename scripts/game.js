@@ -3,6 +3,8 @@ import { getPause } from "./screens.js";
 
 const playground = document.getElementById("playground");
 
+const GRID_SIZE = 21;
+
 const SNAKE_SPEED = 5;
 const snakePosition = 11;
 
@@ -12,6 +14,14 @@ let coordinates = [
         y : snakePosition
     }
 ]
+
+let foodPosition = {
+    x : 4,
+    y: 4
+}
+
+let EXPANSION_RATE = 1;
+let newSegment = 0;
 
 let playAnimate;
 
@@ -29,12 +39,16 @@ export function generateThePlayground(){
             lastRender = time;
             updateFood();
             updateSnake();
+            checkDeath();
             drawSnake(playground);
+            drawFood();
+
         }
     }
 }
 
 function updateSnake() {
+    addSegment(); 
     const snakeDirection = getSnakeDirection();
     for(let index = coordinates.length - 2; index >= 0; index--) {
         coordinates[index + 1] = {...coordinates[index]}
@@ -45,23 +59,13 @@ function updateSnake() {
 }
 
 function drawSnake(container) {
-    
-    // Remove snake body from DOM
-    removeSnakeBody();
-
+    playground.innerHTML = "";
     coordinates.forEach( pos => {
         const block = document.createElement("div");
         block.style.gridRowStart = pos.y;
         block.style.gridColumnStart = pos.x;
         block.classList.add("snake-body")
         container.appendChild(block);
-    })
-}
-
-// Remove snake body from DOM
-function removeSnakeBody() {
-    document.querySelectorAll(".snake-body").forEach( element => {
-        element.remove();
     })
 }
 
@@ -76,8 +80,50 @@ export function resetSnake(){
         cancelAnimationFrame(playAnimate);
 }
 
-// Create Snake Food
 function updateFood() {
+
+    if(checkFoodAndSnakePositions(foodPosition)){
+        expandSnake(EXPANSION_RATE);
+        foodPosition =  generateFoodPosition();
+    }
+}
+
+function checkFoodAndSnakePositions(position) {
+    return coordinates.some( dir => {
+        if(dir.x === position.x && dir.y === position.y){
+            return true;
+        }
+    })
+}
+
+function expandSnake(rate) {
+    newSegment += rate;
+}
+
+function addSegment() {
+    for(let i = 0; i < newSegment; i++) {
+        coordinates.push({...coordinates[coordinates.length-1]});
+    }
+    newSegment = 0;
+}
+
+function generateFoodPosition() {
+    let randomPosition;
+    while(randomPosition == null || checkFoodAndSnakePositions(randomPosition)){
+        randomPosition = getRandomPosition();
+    }
+    return randomPosition;
+}
+
+function getRandomPosition() {
+    return {
+        x : Math.floor(Math.random() * GRID_SIZE) + 1,
+        y : Math.floor(Math.random() * GRID_SIZE) + 1
+    }
+}
+
+// Create Snake Food
+function drawFood() {
     // Create container element for food
     const element = document.createElement("div");
     element.classList.add("snake-food");
@@ -89,8 +135,14 @@ function updateFood() {
 
     element.appendChild(foodImg);
 
-    element.style.gridRowStart = 4;
-    element.style.gridColumnStart = 4;
+    element.style.gridRowStart = foodPosition.y;
+    element.style.gridColumnStart = foodPosition.x;
 
     playground.appendChild(element);
+}
+
+function checkDeath() {
+    const {x, y} = coordinates[0];
+    if(x < 1 || x > GRID_SIZE || y < 1 || y > GRID_SIZE)
+        alert("Yes")
 }
