@@ -1,6 +1,7 @@
 import Configs from "../configs/Configs.js";
 import { checkDeath } from "./death.js";
 import { drawFood, updateFood } from "./food.js";
+import { PlayerScore } from "./player_s_Object_s.js";
 import { getPause } from "./screens.js";
 import { updateSnake, drawSnake } from "./snake.js"
 
@@ -14,14 +15,14 @@ let snakeBody = [
     }
 ];
 
-let playAnimate;
-
 const playground = document.getElementById("playground");
+let playerScore;
+let playAnimate;
 
 function generateThePlayground(){
 
     let lastRender = 0;
-
+    playerScore = new PlayerScore();
     return function play(time) {
         playAnimate = requestAnimationFrame(play);
         if( !getPause() ){
@@ -66,10 +67,15 @@ function getPlaygroundAnimateFrame() {
     return playAnimate;
 }
 
+function getPlayerScoreObject() {
+    return playerScore;
+}
+
 export {
     generateThePlayground,
     checkFoodAndSnakePositions,
     getSnakeBody,
     setSnakeBody,
-    getPlaygroundAnimateFrame
+    getPlaygroundAnimateFrame,
+    getPlayerScoreObject   
 }

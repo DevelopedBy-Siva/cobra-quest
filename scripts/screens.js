@@ -1,10 +1,11 @@
+import Configs from "../configs/Configs.js";
 import { removeDialogBox } from "./dialog.js";
-import { generateThePlayground } from "./game.js";
+import { generateThePlayground, getPlayerScoreObject } from "./game.js";
 import { allPlayers } from "./index.js";
 import { playerInput } from "./playerInput.js";
 
 let START_GAME = false;
-const ANIMATION_SPEED = 35;
+const ANIMATION_SPEED = Configs.SCROLL_ANIMATION_SPEED;
 let PAUSE = false;
 
 const gameContainer = document.getElementsByClassName("game-container");
@@ -16,6 +17,8 @@ const exitButton = document.getElementById("exit");
 
 // disable Exit button for the First Launch
 exitButton.disabled = true;
+
+const SCORE_LIMIT = Configs.SCORE_LIMIT;
 
 // Optimise browser performance by triggering the event only after few "ms"
 const handleWindowResize = () => {
@@ -44,7 +47,7 @@ const resizeScreen = handleWindowResize();
 window.addEventListener("resize", resizeScreen);
 
 // Move between the screen based on button "CLICK"
-export const moveBetweenScreens = async() => {
+const moveBetweenScreens = async() => {
     if(allPlayers.getActivePlayer()){
         // Checks if the Player Warning is present and is removed
         removePlayerWarningFromDOM();
@@ -123,7 +126,7 @@ function showPlayerWarning() {
 }
 
 // Remove Player warning in the DOM(if present)
-export function removePlayerWarningFromDOM() {
+function removePlayerWarningFromDOM() {
     try{
         document.getElementById("warn-the-player").remove();
     } catch(ex){}
@@ -145,10 +148,41 @@ function resetPlayground() {
 }
 
 // Get/ Update game PAUSE
-export function getPause() {
+function getPause() {
     return PAUSE;
 }
 
-export function changePause(val) {
+function changePause(val) {
     PAUSE = val;
+}
+
+function updateScoreShownInDOM() {
+    try{
+        const scoreElement = document.getElementsByClassName("current-user-score")[0];
+        const score = allPlayers.getActivePlayer().score;
+        if(score)
+            scoreElement.innerHTML = `<span id="current-user-score-title">Score: </span> ${score}`;
+    }catch(ex){}
+}
+
+function updateDOMScore() {
+    const scoreElement = document.querySelector(".game-screen #score span");
+    const playerScoreObj = getPlayerScoreObject();
+    const score = playerScoreObj.getPlayerScore();
+    let limit = (score + "").length;
+    let toShow = score;
+    while(limit < SCORE_LIMIT) {
+        toShow = "0" + toShow;
+        limit++;
+    }
+    scoreElement.innerHTML = toShow;
+}
+
+export {
+    moveBetweenScreens,
+    getPause,
+    changePause,
+    removePlayerWarningFromDOM,
+    updateScoreShownInDOM,
+    updateDOMScore
 }

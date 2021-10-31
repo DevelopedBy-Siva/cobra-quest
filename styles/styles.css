@@ -248,6 +248,7 @@ body{
     bottom: 0;
     background-color: rgba(213, 213, 213, 0.6);
     display: none ;
+    z-index: 9;
 }
 .dialog-box {
     position: absolute;
@@ -693,7 +694,8 @@ body{
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(213, 213, 213, 0.6);
+    z-index: 999;
+    background-color: rgba(213, 213, 213, 0.9);
 }
 
 .game-over-content {
@@ -706,7 +708,7 @@ body{
     border-radius: 10px;
     width: 95%;
     max-width: 600px;
-    height: 310px;
+    height: 315px;
     padding: 10px;
 }
 
@@ -714,7 +716,6 @@ body{
 .game-over-content h3,
 .game-over-content h4,
 .game-over-content h5 {
-    padding: 0;
     margin: 0;
 }
 
@@ -738,7 +739,8 @@ body{
 .game-over-content h4 {
     font-family: 'Fredoka';
     color: rgb(0, 153, 255);
-    padding: 4px;
+    font-size: 14px;
+    padding: 6px;
     text-align: center;
 }
 

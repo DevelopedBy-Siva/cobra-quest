@@ -1,8 +1,10 @@
 import Configs from "../configs/Configs.js";
 import { returnHome } from "./dialog.js";
-import { getSnakeBody } from "./game.js";
+import { getPlayerScoreObject, getSnakeBody } from "./game.js";
+import { allPlayers } from "./index.js";
 import { playerInput } from "./playerInput.js";
-import { changePause } from "./screens.js";
+import { loadPlayers, setLoadData } from "./players.js";
+import { changePause, updateScoreShownInDOM } from "./screens.js";
 
 const GRID_SIZE = Configs.GRID_SIZE;
 
@@ -14,12 +16,18 @@ function checkDeath() {
         dead = true;
     }
     if(dead){
-        window.removeEventListener("keydown", playerInput)
-        createGameOverElement();
+        window.removeEventListener("keydown", playerInput);
+        const playerScore = getPlayerScoreObject();
+        const highScore = allPlayers.getHighScore();;
+        if(playerScore) {
+            allPlayers.setPlayerScore(playerScore.getPlayerScore());
+        }
+        updateScoreShownInDOM();
+        createGameOverElement(highScore);
     }
 }
 
-function createGameOverElement() {
+function createGameOverElement(highScore) {
 
     const container = document.createElement("div");
     container.classList.add("game-over");
@@ -32,12 +40,15 @@ function createGameOverElement() {
     title.innerHTML = "GAME<br>OVER";
     content.appendChild(title);
 
+    // Get Player Score Details
+    const details = getCurrentScore(highScore);
+
     const subHead = document.createElement("h4");
-    subHead.innerText = "SCORE";
+    subHead.innerHTML = details.title;
     content.appendChild(subHead);
 
     const score = document.createElement("h3");
-    score.innerText = "18900";
+    score.innerText = details.score;
     content.appendChild(score);
 
     const button = document.createElement("button");
@@ -49,12 +60,42 @@ function createGameOverElement() {
     const gameScreen = document.getElementsByClassName("game-screen")[0];
     gameScreen.appendChild(container);
 
-    button.addEventListener("click", () => {
-        returnHome(); // Back to Home Screen
+    button.addEventListener("click", () => resetTheGame(container));
+}
+
+// Reset The Game
+function resetTheGame(container) {
+    refreshLocalStorage();
+    returnHome(); // Back to Home Screen
+    setTimeout(() => {
         container.remove(); // Remove Game Over container
-    });
+    }, 500);
+}
+
+// Reload the Players from the LocalStorage
+function refreshLocalStorage() {
+    const playerList = document.getElementsByClassName("user-list-container")[0];
+    playerList.innerHTML = "";
+    setLoadData(false);
+    loadPlayers();
+    setLoadData(true);
+}
+
+function getCurrentScore(highScore) {
+    const playerScoreObj = getPlayerScoreObject();
+    const score = playerScoreObj.getPlayerScore();
+    
+    let title = "SCORE";
+    if(highScore < score) {
+        title = "CONGRATULATIONS!!! <br> YOU HAVE GOT A NEW HIGHSCORE";
+    }
+    return {
+        title,
+        score
+    }
 }
 
 export {
-    checkDeath
+    checkDeath,
+    allPlayers
 }

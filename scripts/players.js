@@ -10,7 +10,7 @@ const userInput = document.getElementById("new-user-input");
 
 const playerList = document.getElementsByClassName("user-list-container")[0];
 
-let scrollPosition=0;
+let scrollPosition = 0;
 
 export const handlePlayers = () => {
     userCover.style.display = "block";
@@ -69,6 +69,7 @@ const animatePlayer = addPlayerAnimation();
 export const createPlayerElements = (player) => {
 
     if(!LOAD_DATA){
+        
         // Create Playername element
         const nameElement = document.createElement("span");
         nameElement.className = "username";
@@ -299,4 +300,12 @@ function currentPlayerExists() {
             scoreElement.remove();
         }
     }catch(ex){}
+}
+
+function setLoadData(data) {
+    LOAD_DATA = data;
+}
+
+export {
+    setLoadData
 }

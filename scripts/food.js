@@ -1,5 +1,6 @@
 import Configs from "../configs/Configs.js";
-import { checkFoodAndSnakePositions } from "./game.js";
+import { checkFoodAndSnakePositions, getPlayerScoreObject } from "./game.js";
+import { updateDOMScore } from "./screens.js";
 import { expandSnake } from "./snake.js";
 
 const playground = document.getElementById("playground");
@@ -35,6 +36,10 @@ function updateFood() {
 
     if(checkFoodAndSnakePositions(foodPosition)){
         expandSnake(EXPANSION_RATE);
+        const playerScoreObj = getPlayerScoreObject();
+        if(playerScoreObj)
+            playerScoreObj.setPlayerScore();
+        updateDOMScore();
         foodPosition =  generateFoodPosition();
     }
 }

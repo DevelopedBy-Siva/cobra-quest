@@ -1,3 +1,6 @@
+import Configs from "../configs/Configs.js";
+
+const SCORE_INCREMENT = Configs.SCORE_INCREMENT;
 class Player {
 
     constructor(name, score){
@@ -68,6 +71,31 @@ class AllPlayers {
         return player[0];
     }
 
+    setPlayerScore(score) {
+        const player = this.getActivePlayer();
+        let updated = false;
+        this.players.forEach( i => {
+            if(i.name === player.name) {
+                if(i.score < score) {
+                    i.score = score;
+                    updated = true;
+                }
+            }
+        });
+        if(updated)
+            this.savePlayersToLocalStorage();
+    }
+
+    getHighScore() {
+        let score = 0;
+        this.players.forEach( i => {
+            if(i.score > score) {
+                score = i.score;
+            }
+        });
+        return score;
+    }
+
     loadPlayersFromStorage(){
         try{
             const item = localStorage.getItem(this.storageKey);
@@ -87,7 +115,23 @@ class AllPlayers {
     }
 }
 
+class PlayerScore {
+
+    constructor(score = 0) {
+        this.score = score;
+    }
+
+    setPlayerScore() {
+        this.score += SCORE_INCREMENT;
+    }
+
+    getPlayerScore() {
+        return this.score;
+    } 
+}
+
 export {
     Player,
-    AllPlayers
+    AllPlayers,
+    PlayerScore
 };
