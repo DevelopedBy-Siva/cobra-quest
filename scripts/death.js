@@ -112,9 +112,7 @@ function resetTheGame(container) {
 function refreshLocalStorage() {
     const playerList = document.getElementsByClassName("user-list-container")[0];
     playerList.innerHTML = "";
-    setLoadData(false);
     loadPlayers();
-    setLoadData(true);
 }
 
 function getCurrentScore(highScore) {
