@@ -1,3 +1,3 @@
-# A Simple Snake Game using Javascript
+## A simple snake game using vanilla js
 
-https://developedby-siva.github.io/Snake-Game/
+[Play Here](https://developedby-siva.github.io/Snake-Game)
