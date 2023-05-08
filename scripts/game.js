@@ -3,79 +3,77 @@ import { checkDeath } from "./death.js";
 import { drawFood, updateFood } from "./food.js";
 import { PlayerScore } from "./player_s_Object_s.js";
 import { getPause } from "./screens.js";
-import { updateSnake, drawSnake } from "./snake.js"
+import { updateSnake, drawSnake } from "./snake.js";
 
 const SNAKE_SPEED = Configs.SNAKE_SPEED;
 const initialSnakePosition = Configs.SNAKE_INITIAL_POSITION;
 
 let snakeBody = [
-    {
-        x : initialSnakePosition,
-        y : initialSnakePosition
-    }
+  {
+    x: initialSnakePosition,
+    y: initialSnakePosition,
+  },
 ];
 
 const playground = document.getElementById("playground");
 let playerScore;
 let playAnimate;
 
-function generateThePlayground(){
-
-    let lastRender = 0;
-    playerScore = new PlayerScore();
-    return function play(time) {
-        playAnimate = requestAnimationFrame(play);
-        if( !getPause() ){
-            const sinceLastRender = (time - lastRender)/1000;
-            if(sinceLastRender < 1/SNAKE_SPEED) 
-                return;
-            lastRender = time;
-            update();
-            draw();
-        }
+function generateThePlayground() {
+  let lastRender = 0;
+  playerScore = new PlayerScore();
+  return function play(time) {
+    playAnimate = requestAnimationFrame(play);
+    if (!getPause()) {
+      const sinceLastRender = (time - lastRender) / 1000;
+      if (sinceLastRender < 1 / SNAKE_SPEED) return;
+      lastRender = time;
+      update();
+      draw();
     }
+  };
 }
 
 function update() {
-    updateFood();
-    updateSnake(snakeBody);
-    checkDeath();
+  updateFood();
+  updateSnake(snakeBody);
+  checkDeath();
 }
 
 function draw() {
-    drawSnake(playground, snakeBody);
-    drawFood();
+  drawSnake(playground, snakeBody);
+  drawFood();
 }
 
 function checkFoodAndSnakePositions(food) {
-    return snakeBody.some( snake => {
-        if(snake.x === food.x && snake.y === food.y){
-            return true;
-        }
-    })
+  return snakeBody.some((snake) => {
+    if (snake.x === food.x && snake.y === food.y) {
+      return true;
+    }
+  });
 }
 
 function getSnakeBody() {
-    return snakeBody;
+  return snakeBody;
 }
 
 function setSnakeBody(body) {
-    snakeBody = body;
+  snakeBody = body;
 }
 
 function getPlaygroundAnimateFrame() {
-    return playAnimate;
+  return playAnimate;
 }
 
 function getPlayerScoreObject() {
-    return playerScore;
+  return playerScore;
 }
 
 export {
-    generateThePlayground,
-    checkFoodAndSnakePositions,
-    getSnakeBody,
-    setSnakeBody,
-    getPlaygroundAnimateFrame,
-    getPlayerScoreObject   
-}
+  generateThePlayground,
+  checkFoodAndSnakePositions,
+  getSnakeBody,
+  setSnakeBody,
+  getPlaygroundAnimateFrame,
+  getPlayerScoreObject,
+};

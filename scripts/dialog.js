@@ -11,35 +11,31 @@ const confirmButton = document.getElementById("confirm-btn");
 const cancelButton = document.getElementById("cancel-btn");
 
 cancelButton.addEventListener("click", () => {
-    window.addEventListener("keydown",playerInput);
-    removeDialogBox();
-    changePause(false); // Resume the game
+  window.addEventListener("keydown", playerInput);
+  removeDialogBox();
+  changePause(false); // Resume the game
 });
 
 // Return Home
 confirmButton.addEventListener("click", returnHome);
 
 function returnHome() {
-    moveBetweenScreens();
-    resetDirections();
-    resetSnake();  
+  moveBetweenScreens();
+  resetDirections();
+  resetSnake();
 }
 
 const handleDialogBox = () => {
-    changePause(true); // Pause the game
-    window.removeEventListener("keydown",playerInput)
-    dialogCover.style.display = "block";
-    dialogBox.style.display = "block";
-    cancelButton.focus();  
-}
+  changePause(true); // Pause the game
+  window.removeEventListener("keydown", playerInput);
+  dialogCover.style.display = "block";
+  dialogBox.style.display = "block";
+  cancelButton.focus();
+};
 
 const removeDialogBox = () => {
-    dialogCover.style.display = "none";
-    dialogBox.style.display = "none";
-}
+  dialogCover.style.display = "none";
+  dialogBox.style.display = "none";
+};
 
-export {
-    returnHome,
-    handleDialogBox,
-    removeDialogBox
-}
+export { returnHome, handleDialogBox, removeDialogBox };

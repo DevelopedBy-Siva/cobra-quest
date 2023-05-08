@@ -1,74 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>SNAKE</title>
-    <link rel = "icon" href ="./images/snake.webp" type = "image/x-icon">
-    <link rel="stylesheet" href="./styles/styles.css">
-    <script src="./scripts/index.js" defer type="module" ></script>
-    <script src="https://kit.fontawesome.com/041abb8e24.js" defer crossorigin="anonymous"></script>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <title>Cobra Quest</title>
+    <link rel="icon" href="./images/snake.webp" type="image/x-icon" />
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="./scripts/index.js" defer type="module"></script>
+    <script
+      src="https://kit.fontawesome.com/041abb8e24.js"
+      defer
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
     <div class="game-container">
-        <div class="game game-cover">
-            <div class="player-wrapper">
-                <div class="player-sub-wrapper">
-                    <button id="players">
-                        <i class="fas fa-user-alt"></i>
-                    </button>
-                </div>
-            </div>
-            <div id="user-cover" class="user-cover">
-                <div class="add-user">
-                    <button id="add-user-close" class="add-user-close"><i class="fas fa-times-circle"></i></button>
-                    <input id="new-user-input" spellcheck="false"/>
-                    <button id="add-user-btn" disabled><i class="loading-spinner fas fa-spinner"></i></button>
-                    <div class="user-list">
-                        <span id="user-list-title">Users</span>
-                        <div class="user-list-container"> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="game-title">
-                <img alt="snake_logo" src="./images/snake.webp" />
-                <h4>S_N_A_K_E</h4>
-            </div>
-            <button id="start">START</button>
+      <div class="game game-cover">
+        <div class="player-wrapper">
+          <div class="player-sub-wrapper">
+            <button id="players">
+              <i class="fas fa-user-alt"></i>
+            </button>
+          </div>
         </div>
-        <div class="game game-screen">
-            <div id="navbar">
-                <div id="score">
-                    <img alt="apple" src="./images/apple.webp" >
-                    <span>000000</span>
-                </div>
-                <button id="exit">QUIT</button>
+        <div id="user-cover" class="user-cover">
+          <div class="add-user">
+            <button id="add-user-close" class="add-user-close">
+              <i class="fa fa-times"></i>
+            </button>
+            <input
+              id="new-user-input"
+              placeholder="Enter user name"
+              spellcheck="false"
+            />
+            <button id="add-user-btn" disabled>
+              <i class="loading-spinner fas fa-spinner"></i>
+            </button>
+            <div class="user-list">
+              <span id="user-list-title">Users</span>
+              <div class="user-list-container"></div>
             </div>
-            <div class="game-container">
-                <div id="playground">
-                </div>
-            </div>
-            <div id="dialog-cover">
-                <div id="warning" class="dialog-box">
-                    <div class="dialog-content">
-                        <h4>Are you sure you want to exit?</h4>
-                        <img alt="snake-sad" src = "./images/snake-sad.webp" />
-                    </div>
-                    <div id="dialog-box-buttons">
-                        <button id="confirm-btn" class="dialog-btn">Yes</button>
-                        <button id="cancel-btn" class="dialog-btn">Cancel</button>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-        <div id="loading-screen">
-            <div id="loading-screen-spinner-wrapper">
-                <div id = "loading-screen-spinner">
-                </div>
-            </div>
+        <div class="game-title">
+          <img alt="snake_logo" src="./images/snake.webp" />
+          <h4>Cobra Quest</h4>
         </div>
+        <button id="start">Play</button>
+      </div>
+      <div class="game game-screen">
+        <div id="navbar">
+          <div id="score">
+            <img alt="apple" src="./images/apple.webp" />
+            <span>000000</span>
+          </div>
+          <button id="exit">QUIT</button>
+        </div>
+        <div class="game-container">
+          <div id="playground"></div>
+          <div id="controls">
+            <button class="control" data-option="left">
+              <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </button>
+            <button class="control" data-option="up">
+              <i class="fa fa-arrow-up" aria-hidden="true"></i>
+            </button>
+            <button class="control" data-option="down">
+              <i class="fa fa-arrow-down" aria-hidden="true"></i>
+            </button>
+            <button class="control" data-option="right">
+              <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+        <div id="dialog-cover">
+          <div id="warning" class="dialog-box">
+            <div class="dialog-content">
+              <h4>Are you sure you want to exit?</h4>
+              <img alt="snake-sad" src="./images/snake-sad.webp" />
+            </div>
+            <div id="dialog-box-buttons">
+              <button id="confirm-btn" class="dialog-btn">Yes</button>
+              <button id="cancel-btn" class="dialog-btn">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="loading-screen">
+        <div id="loading-screen-spinner-wrapper">
+          <div id="loading-screen-spinner"></div>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
