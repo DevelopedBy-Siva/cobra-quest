@@ -167,7 +167,6 @@ function delayNewScrollPosition() {
     if (clear) clearTimeout(clear);
     setTimeout(() => {
       scrollPosition = args[0].target.scrollTop;
-      console.log(scrollPosition);
     }, 1000);
   };
 }
