@@ -167,6 +167,7 @@ button {
 }
 
 .game #navbar {
+  flex-shrink: 0;
   width: 95%;
   padding: 12px 0;
   display: flex;
@@ -749,12 +750,15 @@ button {
 }
 
 .game-container #playground {
+  width: 98vw;
+  height: 98vw;
   max-width: 550px;
   max-height: 550px;
   aspect-ratio: 1/1;
   display: grid;
   grid-template-columns: repeat(21, 1fr);
   grid-template-rows: repeat(21, 1fr);
+  overflow: hidden;
   background: #192128;
 }
 
