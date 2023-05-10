@@ -22,7 +22,7 @@ function drawFood() {
   // Create food image
   const foodImg = document.createElement("img");
   foodImg.alt = "snake-food";
-  foodImg.src = "../Snake-Game/images/apple.webp";
+  foodImg.src = "../images/apple.webp";
 
   element.appendChild(foodImg);
 
