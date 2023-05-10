@@ -9,6 +9,9 @@ let lastDirection = {
 };
 
 const control = document.querySelectorAll(".control");
+const controlsContainer = document.querySelector("#controls");
+
+const gamepad = document.querySelector(".gamepad");
 
 function playerInput(input) {
   switch (input.key) {
@@ -75,6 +78,10 @@ control.forEach((item) => {
     });
     document.dispatchEvent(event);
   });
+});
+
+gamepad.addEventListener("click", () => {
+  controlsContainer.classList.toggle("show-controls");
 });
 
 export { getSnakeDirection, resetDirections, playerInput };

@@ -94,13 +94,13 @@ button {
 
 .game-container {
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 }
 
 .game {
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
 }
 
 .game-cover {
@@ -149,6 +149,8 @@ button {
   background: -webkit-linear-gradient(to right, #414345, #232526);
   background: linear-gradient(to right, #414345, #232526);
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .game-screen #exit {
@@ -165,12 +167,9 @@ button {
 }
 
 .game #navbar {
+  flex-shrink: 0;
   width: 95%;
   padding: 12px 0;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, 0);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -709,17 +708,24 @@ button {
 }
 
 .game-screen .game-container {
+  flex: 1;
+  min-height: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
 }
 
 .game-screen .game-container #controls {
   width: 100%;
-  display: flex;
+  display: none;
   justify-content: center;
   max-width: 550px;
+}
+
+.show-controls {
+  display: flex !important;
 }
 
 .game-screen .game-container #controls button {
@@ -733,7 +739,6 @@ button {
   background: none;
   color: #000;
   font-size: 16px;
-  display: none;
 }
 
 .game-screen .game-container #controls button i {
@@ -745,12 +750,15 @@ button {
 }
 
 .game-container #playground {
+  width: 98vw;
+  height: 98vw;
   max-width: 550px;
   max-height: 550px;
   aspect-ratio: 1/1;
   display: grid;
   grid-template-columns: repeat(21, 1fr);
   grid-template-rows: repeat(21, 1fr);
+  overflow: hidden;
   background: #192128;
 }
 
@@ -841,6 +849,36 @@ button {
   font-weight: 300;
 }
 
+.gamepad {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  background: #fff;
+  border: none;
+  outline: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 150ms ease-in-out;
+}
+
+.gamepad i {
+  transition: all 150ms ease-in-out;
+}
+
+.gamepad:hover {
+  background-color: #000;
+}
+
+.gamepad:hover i {
+  color: #fff;
+}
+
 @media (max-width: 920px) {
   .game-cover .game-title h4 {
     font-size: 36px;
@@ -874,7 +912,11 @@ button {
     font-size: 12px;
   }
 
-  .game-screen .game-container #controls button {
-    display: block;
+  .game-screen .game-container #controls {
+    display: flex;
+  }
+
+  .gamepad {
+    display: none;
   }
 }
